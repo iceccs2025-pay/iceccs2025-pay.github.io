@@ -923,16 +923,16 @@ var componentForm = {
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search predictions to
   // geographical location types.
-//  autocomplete = new google.maps.places.Autocomplete(
-//      document.getElementById('ip_useraddress'), {types: ['geocode']});
+  autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('ip_useraddress'), {types: ['geocode']});
 
   // Avoid paying for data that you don't need by restricting the set of
   // place fields that are returned to just the address components.
-//  autocomplete.setFields(['address_component']);
+  autocomplete.setFields(['address_component']);
 
   // When the user selects an address from the drop-down, populate the
   // address fields in the form.
-//  autocomplete.addListener('place_changed', fillInAddress);
+  autocomplete.addListener('place_changed', fillInAddress);
 }
 
 function fillInAddress() {
@@ -977,7 +977,7 @@ function geolocate() {
 	</script>
 	
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW-z745kxDYZDR2GAMqbsMXlGg4SRRbOU&libraries=places&callback=initAutocomplete"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAM9N9pReqfOryMXbl83nV5o7h5HVLa5D0&libraries=places&callback=initAutocomplete"
 async defer></script>
 
 	</body>

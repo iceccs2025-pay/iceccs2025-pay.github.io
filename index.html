@@ -555,24 +555,25 @@ $( document ).ready(function() {
 					<label class="control-label">Registration Fees for Early Bird (before 01 Oct 2023)</label>
 
 					<select class="form-control should_expire" type="text" id="ip_amount">
-            <option data-discount=1 value="0">Tutorial (Free)</option>
             <option data-discount=1 value="800">Regular/Author (SGD800)</option>
             <option data-discount=1 value="640">IEEE Member (SGD640 )</option>
             <option data-discount=1 value="700">Non-author/Student(SGD700 )</option>
             <option data-discount=1 value="1000">Package PRDC&ISACE&ATVA(SGD1000)</option>
-                    </select>   
 
-					
+            <option data-discount=1 value="0">Tutorial (Free)</option>
+                    </select>   
                 </div>
 
+
                 <div class="form-group">
-					   
 					<label class="control-label">Registration Fees</label>
-
-					<div id="paypal-button-container"></div>
-
-
+                    <div id="paypal-button-container"></div>
+                    <div id="free-button-container" style="display:none;">
+                        <a class="btn btn-primary" onclick="freeSubmit();">Send</a>
+                    </div>
 				</div>
+
+
                 <!-- <button class="btn btn-primary pull-right" type="submit">Finish!</button> -->
             </div>
 		</div>
@@ -641,6 +642,51 @@ $( document ).ready(function() {
 
 
 </div>
+
+
+
+<script type="text/javascript">
+    
+var listener_amount = document.getElementById("ip_amount");
+
+listener_amount.addEventListener("change", function() {
+    if(listener_amount.value == 0)
+    {
+        addActivityItem();
+    }else{
+        deActivityItem();
+    }
+});
+function addActivityItem() {
+    console.log("free selected")
+    document.getElementById("paypal-button-container").style.display = "none";
+    document.getElementById("free-button-container").style.display = "block";
+}
+function deActivityItem() {
+    console.log("free selected")
+    document.getElementById("paypal-button-container").style.display = "block";
+    document.getElementById("free-button-container").style.display = "none";
+}
+function randstr(prefix)
+{
+    var rnd= Math.random().toString(36).replace('0.',prefix || '');
+    var rnd2= Math.random().toString(36).replace('0.','');
+
+    rnd =  rnd.toUpperCase();
+    rnd2 =  rnd2.toUpperCase();
+    return rnd+"-"+rnd2
+}
+function freeSubmit() {
+    console.log("free freeSubmit")
+    var paypal_ref_id=randstr("FREEID-")
+    var paypal_log_str=""
+    submit_google_form(paypal_ref_id , paypal_log_str )
+}
+
+
+</script>
+
+
 
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 

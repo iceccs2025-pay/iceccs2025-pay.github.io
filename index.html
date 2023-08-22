@@ -27,6 +27,9 @@
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
+
+
+
 <style>
 /* Latest compiled and minified CSS included as External Resource*/
 
@@ -244,67 +247,6 @@
 
 </style>
 
-<style>
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-</style>
 
 
 </head>
@@ -514,21 +456,24 @@ $( document ).ready(function() {
                 <div class="form-row">
                     <label for="inputEmaixxx"> Tutorial ( slide button to select )</label>
 
-                    <div class="form-group ">
-                        <label class="switch">
-                          <input type="checkbox" id="ip_tutorial_ck1"  >
-                          <span class="slider"></span>
-                        </label>
-                        <label> The K Framework: A tool kit for language semantics and verification ( Date: 24-OCT)</label>
-                    </div>
-                    <div class="form-group ">
+                        <div class="form-group ">
 
-                        <label class="switch">
-                          <input type="checkbox" id="ip_tutorial_ck2" >
-                          <span class="slider"></span>
-                        </label>
-                        <label>Developing Assurance Cases with AdvoCATE ( Date: 24-OCT)</label>
-                    </div>
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" id="ip_checkbox_ck1"  data-toggle="toggle">
+                                The K Framework: A tool kit for language semantics and verification ( Date: 24-OCT)
+                              </label>
+                            </div>
+
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" id="ip_checkbox_ck2"  data-toggle="toggle">
+                                Developing Assurance Cases with AdvoCATE ( Date: 24-OCT)
+                              </label>
+                            </div>
+                        </div>
+
+                   
                 </div>
 
 
@@ -643,7 +588,7 @@ $( document ).ready(function() {
                     <select class="form-control should_expire" type="text" id="ip_amount">
             <option data-discount=1 value="800">Regular/Author (SGD800)</option>
             <option data-discount=1 value="640">IEEE Member (SGD640 )</option>
-            <option data-discount=1 value="700">Non-author/Student(SGD700 )</option>
+            <option data-discount=1 value="700">Non-author Student(SGD700 )</option>
             <option data-discount=1 value="1000">Package PRDC&ISACE&ATVA(SGD1000)</option>
                     </select>   
 
@@ -722,8 +667,8 @@ $( document ).ready(function() {
               <input type="hidden" name="zip" value="none_10">
               <input type="hidden" name="country" value="none_11">
 
-              <input type="hidden" name="tutorial_ck1" value="0">
-              <input type="hidden" name="tutorial_ck2" value="0">
+              <input type="hidden" name="checkbox_ck1" value="0">
+              <input type="hidden" name="checkbox_ck1" value="0">
             </form> 
 
 
@@ -782,17 +727,24 @@ $( document ).ready(function() {
 
       var inner_ele = $('#paypalform input[name="'+search_name+'"]')
       
-      var outer_ele = $('#ip_'+search_name)
-      var outer_ele2 = $('#ip_'+search_name+" option:selected")
+      if search_name.includes("_checkbox_"){
+          var outer_ele2 = $('#ip_'+search_name)
+          inner_ele .val(  $('#ip_'+search_name).is(':checked') )
 
-      if ( outer_ele.length &&  inner_ele.length ) {
-        if (outer_ele.val() ) {
-          inner_ele .val(outer_ele.val() )
-        }else if(outer_ele2.val()){
-            inner_ele .val(outer_ele2.val() )
-        }
+      }else{
+          var outer_ele = $('#ip_'+search_name)
+          var outer_ele2 = $('#ip_'+search_name+" option:selected")
 
+          if ( outer_ele.length &&  inner_ele.length ) {
+            if (outer_ele.val() ) {
+              inner_ele .val(outer_ele.val() )
+            }else if(outer_ele2.val()){
+                inner_ele .val(outer_ele2.val() )
+            }
+          }
       }
+
+      
      
 
 

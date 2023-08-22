@@ -727,7 +727,7 @@ $( document ).ready(function() {
 
       var inner_ele = $('#paypalform input[name="'+search_name+'"]')
       
-      if (search_name.includes("_checkbox_")){
+      if (search_name.includes("checkbox_")){
           var outer_ele2 = $('#ip_'+search_name)
           inner_ele .val(  $('#ip_'+search_name).is(':checked') )
 

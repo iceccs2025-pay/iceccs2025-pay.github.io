@@ -376,7 +376,7 @@ $( document ).ready(function() {
         <td>900 SGD</td>
       </tr>
       <tr>
-        <th scope="row">Non-author/Student*</th>
+        <th scope="row">Non-author Student*</th>
         <td>700 SGD</td>
         <td>800 SGD</td>
       </tr>
@@ -384,6 +384,11 @@ $( document ).ready(function() {
         <th scope="row">IEEE Member*</th>
         <td>640 SGD</td>
         <td>740 SGD</td>
+      </tr>
+      <tr>
+        <th scope="row">Tutorial</th>
+        <td>Free</td>
+        <td>Free</td>
       </tr>
       <tr>
         <th scope="row">Package&#8711; of PRDC2023 & <a href="https://formal-analysis.com/isace/2023/">ISACE 2023</a> & <a href="https://atva-conference.org/2023/">ATVA2023</a></th>
@@ -399,6 +404,7 @@ $( document ).ready(function() {
 
 <p>* Indicates that this registration includes morning tea, lunch, and afternoon tea every day, along with a reception dinner and a conference banquet.</p>
 <p>The Package includes PRDC, ATVA, ISACE, morning tea, lunch and afternoon tea everyday, along with a reception dinner and a conference banquet.</p>
+<p>The tutorial is free; however, it's recommended to register on this website, as each tutorial registration comes with a tutorial kit.</p>
 
 </div>
 
@@ -549,6 +555,7 @@ $( document ).ready(function() {
 					<label class="control-label">Registration Fees for Early Bird (before 01 Oct 2023)</label>
 
 					<select class="form-control should_expire" type="text" id="ip_amount">
+            <option data-discount=1 value="0">Tutorial (Free)</option>
             <option data-discount=1 value="800">Regular/Author (SGD800)</option>
             <option data-discount=1 value="640">IEEE Member (SGD640 )</option>
             <option data-discount=1 value="700">Non-author/Student(SGD700 )</option>

@@ -9,8 +9,9 @@
 	<meta name="language" content="en">
 
 	<title>THE 28th IEEE Pacific Rim International Symposium on Dependable Computing (PRDC 2023)</title>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css" rel="stylesheet" >
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css" />
@@ -26,6 +27,68 @@
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
 
         <style>
 /* Latest compiled and minified CSS included as External Resource*/
@@ -442,12 +505,30 @@ $( document ).ready(function() {
             <div class="panel-body">
 
 				<div class="form-row">
-					<div class="form-group ">
-						<label for="inputEmail4"> PaperID(optional)</label>
-						<input id="ip_paper_id" type="text" class="form-control" placeholder="paper id">
-					</div>
+                    <div class="form-group ">
+                        <label for="inputEmail4"> PaperID(optional)</label>
+                        <input id="ip_paper_id" type="text" class="form-control" placeholder="paper id">
+                    </div>
+                <div class="form-row">
+                    <label for="inputEmaixxx"> Tutorial ( slide button to select )</label>
 
+                    <div class="form-group ">
+                        <label class="switch">
+                          <input type="checkbox" id="ip_tutorial_ck1"  >
+                          <span class="slider"></span>
+                        </label>
+                        <label> The K Framework: A tool kit for language semantics and verification ( Date: 24-OCT)</label>
+                    </div>
+                    <div class="form-group ">
+                        <label class="switch">
+                          <input type="checkbox" id="ip_tutorial_ck2" >
+                          <span class="slider"></span>
+                        </label>
+                        <label>Developing Assurance Cases with AdvoCATE ( Date: 24-OCT)</label>
+                    </div>
+                </div>
 
+                <div class="form-row">
 					<div class="form-group ">
 						<label for="inputEmail4">Firstname</label>
 						<input id="ip_first_name" type="text" class="form-control"   placeholder="Firstname">
@@ -560,17 +641,12 @@ $( document ).ready(function() {
             <option data-discount=1 value="700">Non-author/Student(SGD700 )</option>
             <option data-discount=1 value="1000">Package PRDC&ISACE&ATVA(SGD1000)</option>
 
-            <option data-discount=1 value="0">Tutorial (Free)</option>
                     </select>   
                 </div>
 
 
                 <div class="form-group">
 					<label class="control-label">Registration Fees</label>
-                    <div id="paypal-button-container"></div>
-                    <div id="free-button-container" style="display:none;">
-                        <a class="btn btn-primary" onclick="freeSubmit();">Send</a>
-                    </div>
 				</div>
 
 
@@ -638,6 +714,9 @@ $( document ).ready(function() {
               <input type="hidden" name="zip" value="none_10">
               <input type="hidden" name="country" value="none_11">
 
+              <input type="hidden" name="tutorial_ck1" value="0">
+              <input type="hidden" name="tutorial_ck2" value="0">
+
             </form> 
 
 
@@ -645,46 +724,6 @@ $( document ).ready(function() {
 
 
 
-<script type="text/javascript">
-    
-var listener_amount = document.getElementById("ip_amount");
-
-listener_amount.addEventListener("change", function() {
-    if(listener_amount.value == 0)
-    {
-        addActivityItem();
-    }else{
-        deActivityItem();
-    }
-});
-function addActivityItem() {
-    console.log("free selected")
-    document.getElementById("paypal-button-container").style.display = "none";
-    document.getElementById("free-button-container").style.display = "block";
-}
-function deActivityItem() {
-    console.log("free selected")
-    document.getElementById("paypal-button-container").style.display = "block";
-    document.getElementById("free-button-container").style.display = "none";
-}
-function randstr(prefix)
-{
-    var rnd= Math.random().toString(36).replace('0.',prefix || '');
-    var rnd2= Math.random().toString(36).replace('0.','');
-
-    rnd =  rnd.toUpperCase();
-    rnd2 =  rnd2.toUpperCase();
-    return rnd+"-"+rnd2
-}
-function freeSubmit() {
-    console.log("free freeSubmit")
-    var paypal_ref_id=randstr("FREEID-")
-    var paypal_log_str=""
-    submit_google_form(paypal_ref_id , paypal_log_str )
-}
-
-
-</script>
 
 
 
